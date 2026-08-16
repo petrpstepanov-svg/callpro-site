@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import {
   Phone,
   PhoneCall,
@@ -542,8 +543,15 @@ function Pains() {
                       : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06]"
                   }`}
                 >
-                  <div className="size-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl mb-3">
-                    {p.emoji}
+                  <div className="size-16 md:size-[72px] rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-3 overflow-hidden">
+                    <Image
+                      src={p.image}
+                      alt=""
+                      width={64}
+                      height={64}
+                      className="size-16 md:size-[72px] object-cover"
+                      unoptimized
+                    />
                   </div>
                   <div className="h-1 w-8 bg-gradient-to-r from-amber-400 to-transparent rounded-full mb-3" />
                   <h3 className="font-bold text-lg text-white mb-2">
@@ -1003,9 +1011,7 @@ function Trust() {
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {config.guarantees.map((g, i) => {
-            const Icon = ICONS[g.icon] ?? ShieldCheck;
             const isHero = i === 0;
-            const isAmber = i === 0 || i === 3;
             return (
               <Reveal key={g.title} delay={i * 80}>
                 <div
@@ -1016,13 +1022,20 @@ function Trust() {
                   }`}
                 >
                   <div
-                    className={`rounded-xl flex items-center justify-center mb-4 ${
+                    className={`rounded-xl flex items-center justify-center mb-4 overflow-hidden ${
                       isHero
-                        ? "size-16 bg-gold-gradient shadow-lg shadow-amber-500/30"
-                        : "size-12 bg-amber-500/15 border border-amber-500/40"
+                        ? "size-24 md:size-28 bg-gold-gradient shadow-lg shadow-amber-500/30"
+                        : "size-16 md:size-20 bg-amber-500/15 border border-amber-500/40"
                     }`}
                   >
-                    <Icon className={`size-6 ${isHero ? "text-[#0a1124]" : isAmber ? "text-amber-300" : "text-cyan-300"}`} />
+                    <Image
+                      src={g.image}
+                      alt=""
+                      width={isHero ? 112 : 80}
+                      height={isHero ? 112 : 80}
+                      className={`object-cover ${isHero ? "size-24 md:size-28" : "size-16 md:size-20"}`}
+                      unoptimized
+                    />
                   </div>
                   <h3 className={`font-bold text-white mb-2 ${isHero ? "text-xl md:text-2xl" : "text-lg"}`}>
                     {g.title}

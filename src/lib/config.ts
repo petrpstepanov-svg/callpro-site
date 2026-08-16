@@ -30,13 +30,13 @@ export interface PricingItem {
 }
 
 export interface GuaranteeItem {
-  icon: string;
+  image: string;
   title: string;
   desc: string;
 }
 
 export interface PainItem {
-  emoji: string;
+  image: string;
   title: string;
   desc: string;
 }
@@ -201,32 +201,32 @@ export const config = {
   // Боли целевой аудитории
   pains: [
     {
-      emoji: "📞",
+      image: "/images/pains/01-buried-in-calls.png",
       title: "Продавцы заняты холодными звонками",
       desc: "80% времени уходит на обзвон, 20% — на закрытие сделок. Тёплых лидов нет.",
     },
     {
-      emoji: "🗂️",
+      image: "/images/pains/02-no-database.png",
       title: "Нет своей базы для обзвона",
       desc: "Некому звонить, база устарела или её вообще нет. Поиск контактов съедает недели.",
     },
     {
-      emoji: "🛡️",
+      image: "/images/pains/03-scripts-broken.png",
       title: "Скрипты не работают",
       desc: "Секретари шлют лесом, ЛПР не доходят. Разговоры не приносят результата.",
     },
     {
-      emoji: "💼",
+      image: "/images/pains/04-inhouse-expensive.png",
       title: "Свои операторы = дорого",
       desc: "Зарплата + налоги + рабочие места + текучка. Содержать штат операторов нерентабельно.",
     },
     {
-      emoji: "💸",
+      image: "/images/pains/05-unknown-cost.png",
       title: "Не понимаете стоимость лида",
       desc: "Платите за минуты, а не за результат. Невозможно посчитать реальную стоимость клиента.",
     },
     {
-      emoji: "⏳",
+      image: "/images/pains/06-months-launch.png",
       title: "Запуск занимает месяцы",
       desc: "Найм, обучение, скрипты, тесты. Пока запустите — рынок уже изменился.",
     },
@@ -366,32 +366,32 @@ export const config = {
   // Гарантии
   guarantees: [
     {
-      icon: "BadgeCheck",
+      image: "/images/guarantees/01-pay-for-result.png",
       title: "Оплата за результат",
       desc: "Платите за лиды, встречи и квалифицированные контакты — не за пустые минуты в трубке",
     },
     {
-      icon: "Zap",
+      image: "/images/guarantees/02-fast-launch.png",
       title: "Запуск за 3–5 дней",
       desc: "От брифа до первых звонков — максимум 5 дней. Договор и скрипт — за 1–2 дня",
     },
     {
-      icon: "ShieldCheck",
+      image: "/images/guarantees/03-quality-control.png",
       title: "Контроль качества",
       desc: "Запись всех звонков, выборочная проверка, доступ к прослушке 24/7",
     },
     {
-      icon: "Target",
+      image: "/images/guarantees/04-custom-script.png",
       title: "Скрипт под вашу нишу",
       desc: "Не шаблон — погружаемся в продукт, тестируем речевые модули и обход секретаря",
     },
     {
-      icon: "RefreshCw",
+      image: "/images/guarantees/05-operator-swap.png",
       title: "Замена оператора",
       desc: "Если результат не устраивает — меняем оператора на проекте без доплат",
     },
     {
-      icon: "BarChart3",
+      image: "/images/guarantees/06-transparent-reports.png",
       title: "Прозрачная отчётность",
       desc: "Ежедневный и еженедельный отчёт по звонкам, лидам, конверсии и стоимости",
     },
