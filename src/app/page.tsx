@@ -29,7 +29,6 @@ import {
   Sparkles,
   ArrowRight,
   Quote,
-  MessageCircle,
   Send,
   type LucideIcon,
 } from "lucide-react";
@@ -41,6 +40,74 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { ContactForm } from "@/components/contact-form";
+
+/* ============================================================
+   CTA-ЯКОРЬ — кнопка, ведущая на форму в подвале
+   ============================================================ */
+function CtaAnchor({
+  variant = "gold",
+  size = "md",
+  pulse = false,
+  className = "",
+  children,
+}: {
+  variant?: "gold" | "white" | "cyan" | "outline";
+  size?: "sm" | "md" | "lg" | "xl";
+  pulse?: boolean;
+  className?: string;
+  children?: ReactNode;
+}) {
+  const variants: Record<string, string> = {
+    gold: "bg-gold-gradient text-[#0a1124] hover:brightness-110 shadow-lg shadow-amber-500/25",
+    white: "bg-white text-[#0a1124] hover:bg-slate-100 shadow-lg",
+    cyan: "bg-premium-gradient text-white hover:brightness-110 shadow-lg shadow-cyan-500/25",
+    outline:
+      "border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 backdrop-blur-sm",
+  };
+  const sizes: Record<string, string> = {
+    sm: "px-4 py-2 text-sm",
+    md: "px-5 py-3 text-base",
+    lg: "px-6 py-3.5 text-base md:text-lg",
+    xl: "px-8 py-5 text-lg md:text-xl",
+  };
+  return (
+    <a
+      href="#contact-form"
+      className={`pulse-call inline-flex items-center justify-center gap-2.5 rounded-xl font-bold tracking-tight transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] min-h-[48px] ${variants[variant]} ${sizes[size]} ${pulse ? "glow-gold" : ""} ${className}`}
+    >
+      <Phone className="size-5" />
+      <span>{children}</span>
+    </a>
+  );
+}
+
+/* ============================================================
+   MAX — российский мессенджер (фиолетовый). Заглушка иконки.
+   ============================================================ */
+function MaxIcon({ className = "size-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 2C6.477 2 2 6.253 2 11.5c0 2.765 1.31 5.243 3.39 6.96L4 22l3.85-1.7C9.16 20.74 10.55 21 12 21c5.523 0 10-4.253 10-9.5S17.523 2 12 2Z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 15.5V9.2L12 13l5-3.8v6.3"
+        stroke="#fff"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 /* ============================================================
    ИКОНКИ — маппинг строковых ключей в Lucide-компоненты
@@ -306,15 +373,15 @@ function Navigation() {
               <span className="text-sm md:text-base">{config.phone}</span>
             </a>
             <a
-              href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
-              className="hidden md:inline-flex items-center justify-center size-9 rounded-lg bg-trust/15 border border-trust/30 text-trust hover:bg-trust/25 transition-colors"
-              aria-label="WhatsApp"
-              title="Написать в WhatsApp"
+              href={config.maxUrl || "#"}
+              className="hidden md:inline-flex items-center justify-center size-9 rounded-lg bg-purple-500/15 border border-purple-500/40 text-purple-300 hover:bg-purple-500/25 transition-colors"
+              aria-label="MAX"
+              title="Написать в MAX"
             >
-              <MessageCircle className="size-4" />
+              <MaxIcon className="size-4" />
             </a>
             <a
-              href={`https://t.me/${config.telegram.replace('@', '')}`}
+              href={config.telegramUrl}
               className="hidden md:inline-flex items-center justify-center size-9 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/25 transition-colors"
               aria-label="Telegram"
               title="Написать в Telegram"
@@ -357,13 +424,13 @@ function Navigation() {
             </a>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <a
-                href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-trust/15 border border-trust/30 px-4 py-3 text-sm font-semibold text-trust"
+                href={config.maxUrl || "#"}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-500/15 border border-purple-500/40 px-4 py-3 text-sm font-semibold text-purple-300"
               >
-                <MessageCircle className="size-4" /> WhatsApp
+                <MaxIcon className="size-4" /> MAX
               </a>
               <a
-                href={`https://t.me/${config.telegram.replace('@', '')}`}
+                href={config.telegramUrl}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500/15 border border-cyan-500/30 px-4 py-3 text-sm font-semibold text-cyan-300"
               >
                 <Send className="size-4" /> Telegram
@@ -412,14 +479,14 @@ function Hero() {
             </div>
 
             {/* Заголовок */}
-            <h1 className="mt-6 font-black text-4xl sm:text-5xl md:text-6xl xl:text-7xl tracking-tight leading-[1.05] text-white">
+            <h1 className="mt-6 font-black text-4xl sm:text-5xl md:text-6xl xl:text-7xl tracking-tight leading-[1.05] text-white hero-title-shadow">
               {config.heroTitle}
               <br />
               <span className="text-cyan-300 font-black">{config.heroAccent}</span>
             </h1>
 
             {/* Подзаголовок */}
-            <p className="mt-6 text-lg md:text-xl text-slate-100 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="mt-6 text-lg md:text-xl text-slate-100 max-w-xl mx-auto lg:mx-0 leading-relaxed section-subtitle-shadow">
               Профессиональный обзвон для B2B: лиды, встречи и квалифицированные контакты.{" "}
               <span className="accent-word-amber">
                 <Zap className="inline size-4 mr-1" />
@@ -445,13 +512,13 @@ function Hero() {
             {/* Мессенджеры */}
             <div className="mt-5 flex items-center justify-center lg:justify-start gap-3">
               <a
-                href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent('Здравствуйте! Пишу с сайта CallPro — хочу обсудить обзвон B2B')}`}
-                className="inline-flex items-center gap-2 rounded-lg bg-trust/15 border border-trust/30 px-4 py-2.5 text-sm font-semibold text-trust hover:bg-trust/25 transition-colors"
+                href={config.maxUrl || "#"}
+                className="inline-flex items-center gap-2 rounded-lg bg-purple-500/15 border border-purple-500/40 px-4 py-2.5 text-sm font-semibold text-purple-300 hover:bg-purple-500/25 transition-colors"
               >
-                <MessageCircle className="size-4" /> WhatsApp
+                <MaxIcon className="size-4" /> MAX
               </a>
               <a
-                href={`https://t.me/${config.telegram.replace('@', '')}?start=from_site`}
+                href={`${config.telegramUrl}?start=from_site`}
                 className="inline-flex items-center gap-2 rounded-lg bg-cyan-500/15 border border-cyan-500/30 px-4 py-2.5 text-sm font-semibold text-cyan-300 hover:bg-cyan-500/25 transition-colors"
               >
                 <Send className="size-4" /> Telegram
@@ -521,11 +588,11 @@ function Pains() {
             <Badge className="mb-4 bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/20">
               Знакомая ситуация?
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Теряете клиентов из-за{" "}
               <span className="text-cyan-300">слабого обзвона?</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               Решим это за <span className="accent-word-amber">{config.launchTime}</span>. 6 типичных болей B2B, которые закрываем на аутсорсе — без найма, налогов и текучки.
             </p>
           </div>
@@ -568,9 +635,9 @@ function Pains() {
 
         <Reveal delay={200}>
           <div className="mt-12 text-center">
-            <CallButton variant="gold" size="lg" pulse>
+            <CtaAnchor variant="gold" size="lg" pulse>
               Закрыть эти 6 болей за {config.launchTime} →
-            </CallButton>
+            </CtaAnchor>
             <div className="mt-3 text-xs text-slate-400">
               Без предоплаты · Перезвоним за 15 минут · Договор с гарантиями
             </div>
@@ -594,11 +661,11 @@ function Services() {
             <Badge className="mb-4 bg-cyan-500/15 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20">
               Услуги
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Полный спектр телефонных{" "}
               <span className="text-cyan-300">коммуникаций B2B</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               От холодных звонков до горячей линии — всё в одних руках. Оплата за <span className="accent-word">результат</span> или по минутам.
             </p>
           </div>
@@ -670,9 +737,9 @@ function Services() {
                 Позвоните — поможем выбрать за 15 минут
               </div>
             </div>
-            <CallButton variant="gold" size="md">
+            <CtaAnchor variant="gold" size="md">
               Получить консультацию
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -692,11 +759,11 @@ function Steps() {
             <Badge className="mb-4 bg-cyan-500/15 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20">
               Как мы работаем
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Запуск за {config.launchTime} —{" "}
               <span className="text-cyan-300">без бюрократии</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               От звонка до первых лидов — 4 шага и максимум неделя.
             </p>
           </div>
@@ -761,9 +828,9 @@ function Steps() {
 
         <Reveal delay={200}>
           <div className="mt-12 text-center">
-            <CallButton variant="gold" size="lg" pulse>
+            <CtaAnchor variant="gold" size="lg" pulse>
               Запустить обзвон за {config.launchTime} →
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -784,11 +851,11 @@ function Pricing() {
             <Badge className="mb-4 bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/20">
               Цены
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Прозрачные цены —{" "}
               <span className="text-cyan-300">без скрытых платежей</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               Выберите формат сотрудничества. Точную стоимость назовём по телефону за 15 минут.
             </p>
           </div>
@@ -858,9 +925,9 @@ function Pricing() {
                 Рассчитаем стоимость под вашу задачу за 15 минут
               </div>
             </div>
-            <CallButton variant="cyan" size="md">
+            <CtaAnchor variant="cyan" size="md">
               Рассчитать стоимость
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -880,10 +947,10 @@ function Cases() {
             <Badge className="mb-4 bg-cyan-500/15 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20">
               Кейсы
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Результаты <span className="text-cyan-300">в цифрах</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               Каждый проект — измеримый результат. Не «много звонков», а <span className="accent-word">лиды и деньги</span>.
             </p>
           </div>
@@ -988,9 +1055,9 @@ function Cases() {
                 Обсудим ваш проект за 15 минут — рассчитаем потенциальный ROI
               </div>
             </div>
-            <CallButton variant="gold" size="md">
+            <CtaAnchor variant="gold" size="md">
               Обсудить проект
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -1014,11 +1081,11 @@ function Trust() {
             <Badge className="mb-4 bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/20">
               Гарантии
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               6 гарантий, которые снимают{" "}
               <span className="text-gradient-gold">все риски</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               Платите за <span className="accent-word-amber">результат</span>, контролируете каждый звонок, заменяем оператора если не нравится.
             </p>
           </div>
@@ -1074,9 +1141,9 @@ function Trust() {
                 Подготовим договор за 1 день — без скрытых условий
               </div>
             </div>
-            <CallButton variant="white" size="md">
+            <CtaAnchor variant="white" size="md">
               Получить расчёт с гарантиями →
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -1099,7 +1166,7 @@ function Reviews() {
             <Badge className="mb-4 bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/20">
               Отзывы
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Что говорят{" "}
               <span className="text-cyan-300">клиенты</span>
             </h2>
@@ -1179,9 +1246,9 @@ function Reviews() {
                 Запустим обзвон за {config.launchTime} — первые лиды на 3-й день
               </div>
             </div>
-            <CallButton variant="gold" size="md" pulse>
+            <CtaAnchor variant="gold" size="md" pulse>
               Запустить обзвон →
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -1201,10 +1268,10 @@ function Faq() {
             <Badge className="mb-4 bg-cyan-500/15 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20">
               Вопросы
             </Badge>
-            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
+            <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight section-title-shadow">
               Коротко <span className="text-cyan-300">о главном</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
               Не нашли ответ? Звоните — расскажем за 2 минуты.
             </p>
           </div>
@@ -1243,9 +1310,9 @@ function Faq() {
               Ответим за 15 секунд. Если не ответим — перезвоним за{" "}
               <span className="text-amber-300 font-semibold">{config.responseTime}</span>.
             </p>
-            <CallButton variant="gold" size="lg" pulse>
+            <CtaAnchor variant="gold" size="lg" pulse>
               {config.phone}
-            </CallButton>
+            </CtaAnchor>
           </div>
         </Reveal>
       </div>
@@ -1275,19 +1342,19 @@ function FinalCta() {
             <Zap className="size-3 mr-1" />
             Запуск за {config.launchTime}
           </Badge>
-          <h2 className="font-black text-3xl md:text-5xl lg:text-7xl tracking-tight text-white leading-tight drop-shadow-2xl">
+          <h2 className="font-black text-3xl md:text-5xl lg:text-7xl tracking-tight text-white leading-tight hero-title-shadow">
             Нужен обзвон <br />
             <span className="text-gradient-gold">прямо сейчас?</span>
           </h2>
-          <p className="mt-6 text-lg md:text-xl text-slate-200 max-w-2xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl text-slate-200 max-w-2xl mx-auto section-subtitle-shadow">
             Позвоните — рассчитаем стоимость за 15 минут, запустим обзвон за{" "}
             {config.launchTime}. Первые лиды — на третий день.
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4">
-            <CallButton variant="gold" size="xl" pulse>
+            <CtaAnchor variant="gold" size="xl" pulse>
               {config.phone}
-            </CallButton>
+            </CtaAnchor>
             <div className="flex items-center gap-2 text-amber-200 text-sm font-medium">
               <Clock className="size-4" />
               Звоните сейчас — сегодня запустим, на 3-й день первые лиды
@@ -1321,6 +1388,11 @@ function Footer() {
   return (
     <footer className="bg-[#050818] border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-12">
+        {/* Форма обратной связи — сверху, отдельным блоком */}
+        <div className="mb-12 max-w-md mx-auto">
+          <ContactForm />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-8">
           {/* Бренд */}
           <div>
@@ -1383,16 +1455,16 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
-                  className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 transition-colors"
+                  href={config.maxUrl || "#"}
+                  className="flex items-center gap-2 text-slate-300 hover:text-purple-300 transition-colors"
                 >
-                  <MessageCircle className="size-4 text-trust" />
-                  WhatsApp: {config.whatsapp}
+                  <MaxIcon className="size-4 text-purple-400" />
+                  MAX: {config.maxHandle || "скоро"}
                 </a>
               </li>
               <li>
                 <a
-                  href={`https://t.me/${config.telegram.replace('@', '')}`}
+                  href={config.telegramUrl}
                   className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 transition-colors"
                 >
                   <Send className="size-4 text-cyan-400" />
@@ -1454,14 +1526,14 @@ function StickyCta() {
             Позвонить
           </a>
           <a
-            href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent('Здравствуйте! Пишу с сайта CallPro — хочу обсудить обзвон B2B')}`}
-            className="inline-flex items-center justify-center size-12 rounded-xl bg-trust/15 border border-trust/30 text-trust shrink-0"
-            aria-label="WhatsApp"
+            href={config.maxUrl || "#"}
+            className="inline-flex items-center justify-center size-12 rounded-xl bg-purple-500/15 border border-purple-500/40 text-purple-300 shrink-0"
+            aria-label="MAX"
           >
-            <MessageCircle className="size-5" />
+            <MaxIcon className="size-5" />
           </a>
           <a
-            href={`https://t.me/${config.telegram.replace('@', '')}?start=from_site`}
+            href={`${config.telegramUrl}?start=from_site`}
             className="inline-flex items-center justify-center size-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 shrink-0"
             aria-label="Telegram"
           >
