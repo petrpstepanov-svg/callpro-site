@@ -29,6 +29,7 @@ import {
   ArrowRight,
   Quote,
   MessageCircle,
+  Send,
   type LucideIcon,
 } from "lucide-react";
 import { config } from "@/lib/config";
@@ -304,11 +305,20 @@ function Navigation() {
               <span className="text-sm md:text-base">{config.phone}</span>
             </a>
             <a
-              href={`tel:${config.phoneRaw}`}
-              className="inline-flex items-center gap-2 rounded-lg bg-gold-gradient px-4 py-2.5 text-sm font-bold text-[#0a1124] hover:brightness-110 transition-all hover:scale-[1.03]"
+              href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
+              className="hidden md:inline-flex items-center justify-center size-9 rounded-lg bg-trust/15 border border-trust/30 text-trust hover:bg-trust/25 transition-colors"
+              aria-label="WhatsApp"
+              title="Написать в WhatsApp"
             >
-              <Phone className="size-4" />
-              Позвонить
+              <MessageCircle className="size-4" />
+            </a>
+            <a
+              href={`https://t.me/${config.telegram.replace('@', '')}`}
+              className="hidden md:inline-flex items-center justify-center size-9 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/25 transition-colors"
+              aria-label="Telegram"
+              title="Написать в Telegram"
+            >
+              <Send className="size-4" />
             </a>
           </div>
 
@@ -339,11 +349,25 @@ function Navigation() {
             ))}
             <a
               href={`tel:${config.phoneRaw}`}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gold-gradient px-4 py-3.5 text-base font-bold text-[#0a1124]"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gold-gradient px-4 py-3.5 text-base font-bold text-[#0a1124] glow-gold"
             >
               <Phone className="size-5" />
               {config.phone}
             </a>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <a
+                href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-trust/15 border border-trust/30 px-4 py-3 text-sm font-semibold text-trust"
+              >
+                <MessageCircle className="size-4" /> WhatsApp
+              </a>
+              <a
+                href={`https://t.me/${config.telegram.replace('@', '')}`}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500/15 border border-cyan-500/30 px-4 py-3 text-sm font-semibold text-cyan-300"
+              >
+                <Send className="size-4" /> Telegram
+              </a>
+            </div>
           </nav>
         </div>
       )}
@@ -381,7 +405,7 @@ function Hero() {
             {/* Бейдж */}
             <div className="inline-flex float-badge">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-cyan-400/30 px-4 py-2 text-sm font-medium text-cyan-200">
-                <ShieldCheck className="size-4 text-cyan-400" />
+                <Zap className="size-4 text-amber-400" />
                 {config.heroBadge}
               </div>
             </div>
@@ -390,14 +414,14 @@ function Hero() {
             <h1 className="mt-6 font-black text-4xl sm:text-5xl md:text-6xl xl:text-7xl tracking-tight leading-[1.05] text-white">
               {config.heroTitle}
               <br />
-              <span className="text-gradient-cyan">{config.heroAccent}</span>
+              <span className="text-cyan-300 font-black">{config.heroAccent}</span>
             </h1>
 
             {/* Подзаголовок */}
-            <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              {config.heroSubtitle}{" "}
-              <span className="inline-flex items-center gap-1.5 text-amber-300 font-semibold">
-                <Zap className="size-4" />
+            <p className="mt-6 text-lg md:text-xl text-slate-100 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Профессиональный обзвон для B2B: лиды, встречи и квалифицированные контакты.{" "}
+              <span className="accent-word-amber">
+                <Zap className="inline size-4 mr-1" />
                 {config.heroHighlight}
               </span>
             </p>
@@ -408,13 +432,29 @@ function Hero() {
                 {config.phone}
               </CallButton>
               <div className="text-center sm:text-left">
-                <div className="text-sm text-slate-400">
+                <div className="text-sm text-slate-300 font-medium">
                   {config.ctaCallbackText}
                 </div>
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-slate-400">
                   {config.workHours}
                 </div>
               </div>
+            </div>
+
+            {/* Мессенджеры */}
+            <div className="mt-5 flex items-center justify-center lg:justify-start gap-3">
+              <a
+                href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent('Здравствуйте! Пишу с сайта CallPro — хочу обсудить обзвон B2B')}`}
+                className="inline-flex items-center gap-2 rounded-lg bg-trust/15 border border-trust/30 px-4 py-2.5 text-sm font-semibold text-trust hover:bg-trust/25 transition-colors"
+              >
+                <MessageCircle className="size-4" /> WhatsApp
+              </a>
+              <a
+                href={`https://t.me/${config.telegram.replace('@', '')}?start=from_site`}
+                className="inline-flex items-center gap-2 rounded-lg bg-cyan-500/15 border border-cyan-500/30 px-4 py-2.5 text-sm font-semibold text-cyan-300 hover:bg-cyan-500/25 transition-colors"
+              >
+                <Send className="size-4" /> Telegram
+              </a>
             </div>
 
             {/* Рейтинг */}
@@ -441,7 +481,13 @@ function Hero() {
           <div className="grid grid-cols-2 gap-3 md:gap-4">
             {stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 120}>
-                <div className="premium-card h-full rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-5 md:p-6">
+                <div
+                  className={`h-full rounded-2xl backdrop-blur-md border p-5 md:p-6 transition-all duration-300 ${
+                    i === 0
+                      ? "bg-gradient-to-br from-cyan-500/15 to-amber-500/5 border-cyan-400/40 shadow-lg shadow-cyan-500/10 col-span-2 sm:col-span-1"
+                      : "bg-white/5 border-white/10"
+                  }`}
+                >
                   <div className="text-3xl md:text-4xl font-black text-gradient-cyan tabular-nums">
                     <AnimatedCounter
                       value={s.value}
@@ -467,7 +513,7 @@ function Hero() {
    ============================================================ */
 function Pains() {
   return (
-    <section id="pains" className="relative py-20 md:py-28 bg-[#0d1530]">
+    <section id="pains" className="relative py-20 md:py-28 bg-[#0f1838]">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
@@ -476,36 +522,50 @@ function Pains() {
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
               Теряете клиентов из-за{" "}
-              <span className="text-gradient-cyan">слабого обзвона?</span>
+              <span className="text-cyan-300">слабого обзвона?</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
-              Решим это за {config.launchTime}. 6 типичных болей B2B, которые
-              закрываем на аутсорсе — без найма, налогов и текучки.
+            <p className="mt-4 text-lg text-slate-300">
+              Решим это за <span className="accent-word-amber">{config.launchTime}</span>. 6 типичных болей B2B, которые закрываем на аутсорсе — без найма, налогов и текучки.
             </p>
           </div>
         </Reveal>
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {config.pains.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
-              <div className="premium-card h-full rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:bg-white/[0.06]">
-                <div className="text-3xl mb-3">{p.emoji}</div>
-                <h3 className="font-bold text-lg text-white mb-2">
-                  {p.title}
-                </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  {p.desc}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+          {config.pains.map((p, i) => {
+            const isAccent = i === 0 || i === 3;
+            return (
+              <Reveal key={p.title} delay={i * 80}>
+                <div
+                  className={`premium-card h-full rounded-2xl border p-6 ${
+                    isAccent
+                      ? "bg-amber-500/[0.05] border-amber-500/25"
+                      : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06]"
+                  }`}
+                >
+                  <div className="size-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl mb-3">
+                    {p.emoji}
+                  </div>
+                  <div className="h-1 w-8 bg-gradient-to-r from-amber-400 to-transparent rounded-full mb-3" />
+                  <h3 className="font-bold text-lg text-white mb-2">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    {p.desc}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal delay={200}>
           <div className="mt-12 text-center">
-            <CallButton variant="gold" size="lg">
-              Решить проблему за {config.launchTime}
+            <CallButton variant="gold" size="lg" pulse>
+              Закрыть эти 6 болей за {config.launchTime} →
             </CallButton>
+            <div className="mt-3 text-xs text-slate-400">
+              Без предоплаты · Перезвоним за 15 минут · Договор с гарантиями
+            </div>
           </div>
         </Reveal>
       </div>
@@ -528,11 +588,10 @@ function Services() {
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
               Полный спектр телефонных{" "}
-              <span className="text-gradient-cyan">коммуникаций B2B</span>
+              <span className="text-cyan-300">коммуникаций B2B</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
-              От холодных звонков до горячей линии — всё в одних руках. Оплата
-              за результат или по минутам.
+            <p className="mt-4 text-lg text-slate-300">
+              От холодных звонков до горячей линии — всё в одних руках. Оплата за <span className="accent-word">результат</span> или по минутам.
             </p>
           </div>
         </Reveal>
@@ -542,30 +601,66 @@ function Services() {
             const Icon = ICONS[s.icon] ?? PhoneCall;
             return (
               <Reveal key={s.title} delay={i * 80}>
-                <div className="premium-card h-full relative rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:bg-white/[0.06] flex flex-col">
+                <div
+                  className={`premium-card h-full relative rounded-2xl border p-6 flex flex-col ${
+                    s.featured
+                      ? "bg-gradient-to-br from-cyan-500/5 to-amber-500/[0.03] ring-2 ring-amber-400/40 border-amber-400/30"
+                      : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06]"
+                  }`}
+                >
                   {s.featured && (
                     <span className="absolute top-4 right-4 inline-flex items-center gap-1 rounded-full bg-gold-gradient px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#0a1124]">
                       <Sparkles className="size-3" /> Топ
                     </span>
                   )}
-                  <div className="size-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center mb-4">
+                  <div
+                    className={`size-14 rounded-xl flex items-center justify-center mb-4 ${
+                      s.featured
+                        ? "bg-cyan-500/25 border border-cyan-400/50"
+                        : "bg-cyan-500/15 border border-cyan-500/30"
+                    }`}
+                  >
                     <Icon className="size-6 text-cyan-300" />
                   </div>
                   <h3 className="font-bold text-lg text-white mb-2">
                     {s.title}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed flex-1">
+                  <p className="text-sm text-slate-300 leading-relaxed flex-1">
                     {s.desc}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                    <span className="text-amber-300 font-bold">{s.price}</span>
-                    <ArrowRight className="size-4 text-slate-500" />
+                  <div className="mt-4 pt-4 border-t border-white/10 flex items-end justify-between">
+                    <div>
+                      <div className="text-xs text-slate-400 mb-0.5">Цена</div>
+                      <span className="text-amber-300 font-black text-xl">{s.price}</span>
+                    </div>
+                    <a
+                      href={`tel:${config.phoneRaw}`}
+                      className="inline-flex items-center gap-1 text-sm text-cyan-300 font-semibold hover:text-cyan-200 transition-colors"
+                    >
+                      Узнать <ArrowRight className="size-4" />
+                    </a>
                   </div>
                 </div>
               </Reveal>
             );
           })}
         </div>
+
+        <Reveal delay={200}>
+          <div className="mt-10 mini-cta flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <div className="font-bold text-white text-base md:text-lg">
+                Не знаете, какая услуга подойдёт?
+              </div>
+              <div className="text-sm text-slate-300 mt-1">
+                Позвоните — поможем выбрать за 15 минут
+              </div>
+            </div>
+            <CallButton variant="gold" size="md">
+              Получить консультацию
+            </CallButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -576,7 +671,7 @@ function Services() {
    ============================================================ */
 function Steps() {
   return (
-    <section id="steps" className="relative py-20 md:py-28 bg-[#0d1530]">
+    <section id="steps" className="relative py-20 md:py-28 bg-gradient-to-b from-[#0d1530] to-[#0a1124]">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
@@ -585,17 +680,17 @@ function Steps() {
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
               Запуск за {config.launchTime} —{" "}
-              <span className="text-gradient-cyan">без бюрократии</span>
+              <span className="text-cyan-300">без бюрократии</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
+            <p className="mt-4 text-lg text-slate-300">
               От звонка до первых лидов — 4 шага и максимум неделя.
             </p>
           </div>
         </Reveal>
 
         <div className="mt-12 relative">
-          {/* Вертикальная линия */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/0 via-cyan-500/40 to-cyan-500/0 md:-translate-x-1/2" />
+          {/* Вертикальная линия — утолщена + градиент */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/0 via-cyan-500/50 to-cyan-500/0 md:-translate-x-1/2" />
 
           <div className="space-y-8 md:space-y-12">
             {config.steps.map((step, i) => {
@@ -608,22 +703,26 @@ function Steps() {
                       isLeft ? "md:flex-row" : "md:flex-row-reverse"
                     }`}
                   >
-                    {/* Кружок с номером */}
+                    {/* Кружок с иконкой — контур вместо заливки */}
                     <div className="relative z-10 shrink-0 ml-6 md:ml-0 md:w-1/2 md:flex md:justify-end md:items-center">
                       <div
-                        className={`size-12 md:size-14 rounded-full bg-premium-gradient border-4 border-[#0d1530] flex items-center justify-center shadow-lg shadow-cyan-500/30 ${
+                        className={`size-12 md:size-14 rounded-full bg-cyan-500/10 border-2 border-cyan-400/50 flex items-center justify-center shadow-lg shadow-cyan-500/20 ${
                           isLeft ? "md:order-1" : "md:order-1"
                         }`}
                       >
-                        <Icon className="size-5 md:size-6 text-white" />
+                        <Icon className="size-5 md:size-6 text-cyan-200" />
                       </div>
                     </div>
 
                     {/* Контент */}
                     <div className="flex-1 md:w-1/2 pb-2">
-                      <div className="premium-card rounded-2xl bg-white/[0.03] border border-white/10 p-5 md:p-6">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-2xl md:text-3xl font-black text-gradient-cyan tabular-nums">
+                      <div className="premium-card relative rounded-2xl bg-white/[0.03] border border-white/10 p-5 md:p-6 overflow-hidden">
+                        {/* Watermark номер */}
+                        <span className="absolute -top-4 -right-2 text-7xl md:text-8xl font-black text-white/[0.04] leading-none pointer-events-none select-none">
+                          {step.num}
+                        </span>
+                        <div className="relative flex items-center gap-3 mb-2">
+                          <span className="text-xl md:text-2xl font-black text-cyan-300 tabular-nums">
                             {step.num}
                           </span>
                           <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/20">
@@ -631,10 +730,10 @@ function Steps() {
                             {step.time}
                           </Badge>
                         </div>
-                        <h3 className="font-bold text-lg md:text-xl text-white mb-2">
+                        <h3 className="relative font-bold text-lg md:text-xl text-white mb-2">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                        <p className="relative text-sm md:text-base text-slate-300 leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
@@ -648,8 +747,8 @@ function Steps() {
 
         <Reveal delay={200}>
           <div className="mt-12 text-center">
-            <CallButton variant="gold" size="lg">
-              Запустить обзвон за {config.launchTime}
+            <CallButton variant="gold" size="lg" pulse>
+              Запустить обзвон за {config.launchTime} →
             </CallButton>
           </div>
         </Reveal>
@@ -664,7 +763,7 @@ function Steps() {
 function Pricing() {
   return (
     <section id="pricing" className="relative py-20 md:py-28 bg-[#0a1124]">
-      <div className="absolute inset-0 dot-pattern opacity-30" />
+      <div className="absolute inset-0 dot-pattern opacity-50" />
       <div className="relative mx-auto max-w-6xl px-4 md:px-6">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
@@ -673,11 +772,10 @@ function Pricing() {
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
               Прозрачные цены —{" "}
-              <span className="text-gradient-cyan">без скрытых платежей</span>
+              <span className="text-cyan-300">без скрытых платежей</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
-              Выберите формат сотрудничества. Точную стоимость назовём по
-              телефону за 15 минут.
+            <p className="mt-4 text-lg text-slate-300">
+              Выберите формат сотрудничества. Точную стоимость назовём по телефону за 15 минут.
             </p>
           </div>
         </Reveal>
@@ -686,10 +784,10 @@ function Pricing() {
           {config.pricing.map((p, i) => (
             <Reveal key={p.type} delay={i * 100}>
               <div
-                className={`relative h-full rounded-2xl p-6 md:p-8 flex flex-col ${
+                className={`relative h-full rounded-2xl p-6 md:p-8 flex flex-col transition-all duration-300 ${
                   p.popular
-                    ? "bg-gradient-to-br from-cyan-500/10 to-amber-500/5 border-2 border-cyan-400/60 shadow-xl shadow-cyan-500/10"
-                    : "bg-white/[0.03] border border-white/10"
+                    ? "bg-gradient-to-br from-cyan-500/10 to-amber-500/5 border-2 border-cyan-400/60 shadow-2xl shadow-cyan-500/20 md:scale-[1.03]"
+                    : "bg-white/[0.03] border border-white/10 hover:border-cyan-400/30"
                 }`}
               >
                 {p.popular && (
@@ -702,7 +800,7 @@ function Pricing() {
                 </div>
                 <h3 className="mt-2 font-bold text-xl text-white">{p.type}</h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-4xl md:text-5xl font-black text-gradient-cyan">
+                  <span className={`font-black ${p.popular ? "text-4xl md:text-5xl text-gradient-cyan" : "text-3xl md:text-4xl text-cyan-300"}`}>
                     {p.price}
                   </span>
                 </div>
@@ -724,8 +822,8 @@ function Pricing() {
                   href={`tel:${config.phoneRaw}`}
                   className={`mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-base font-bold transition-all hover:scale-[1.02] ${
                     p.popular
-                      ? "bg-gold-gradient text-[#0a1124] shadow-lg shadow-amber-500/25"
-                      : "bg-white/10 text-white hover:bg-white/15 border border-white/15"
+                      ? "bg-gold-gradient text-[#0a1124] shadow-lg shadow-amber-500/25 glow-gold"
+                      : "bg-white/10 border border-cyan-400/30 text-cyan-200 hover:bg-cyan-400/10"
                   }`}
                 >
                   <Phone className="size-4" />
@@ -737,10 +835,19 @@ function Pricing() {
         </div>
 
         <Reveal delay={200}>
-          <p className="mt-8 text-center text-sm text-slate-500">
-            Точную стоимость назовём по телефону за 15 секунд — зависит от ниши,
-            базы и критериев лида.
-          </p>
+          <div className="mt-8 mini-cta flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <div className="font-bold text-white text-base md:text-lg">
+                Не уверены, какой тариф подойдёт?
+              </div>
+              <div className="text-sm text-slate-300 mt-1">
+                Рассчитаем стоимость под вашу задачу за 15 минут
+              </div>
+            </div>
+            <CallButton variant="cyan" size="md">
+              Рассчитать стоимость
+            </CallButton>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -752,7 +859,7 @@ function Pricing() {
    ============================================================ */
 function Cases() {
   return (
-    <section id="cases" className="relative py-20 md:py-28 bg-[#0d1530]">
+    <section id="cases" className="relative py-20 md:py-28 bg-[#0f1838]">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
@@ -760,62 +867,109 @@ function Cases() {
               Кейсы
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
-              Результаты <span className="text-gradient-cyan">в цифрах</span>
+              Результаты <span className="text-cyan-300">в цифрах</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
-              Каждый проект — измеримый результат. Не «много звонков», а лиды и
-              деньги.
+            <p className="mt-4 text-lg text-slate-300">
+              Каждый проект — измеримый результат. Не «много звонков», а <span className="accent-word">лиды и деньги</span>.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {config.cases.map((c, i) => (
-            <Reveal key={c.niche} delay={i * 100}>
-              <div className="premium-card h-full rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden">
-                {/* Header с цифрой */}
-                <div className="relative h-40 bg-gradient-to-br from-cyan-500/20 via-[#131c3d] to-amber-500/10 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 dot-pattern opacity-50" />
-                  <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/15 px-2.5 py-1 rounded-full border border-cyan-500/30">
+            <Reveal key={c.niche} delay={i * 80}>
+              <div
+                className={`premium-card h-full rounded-2xl border overflow-hidden flex flex-col ${
+                  c.featured
+                    ? "border-cyan-400/40 bg-gradient-to-br from-cyan-500/[0.06] to-amber-500/[0.03] lg:col-span-1 ring-1 ring-cyan-400/30"
+                    : "bg-white/[0.03] border-white/10"
+                }`}
+              >
+                {/* Header — деньги крупно, процент мелко */}
+                <div className="relative h-44 bg-gradient-to-br from-cyan-500/15 via-[#131c3d] to-amber-500/10 flex flex-col items-center justify-center overflow-hidden p-4">
+                  <div className="absolute inset-0 dot-pattern opacity-40" />
+                  <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/15 px-2.5 py-1 rounded-full border border-cyan-500/30 z-10">
                     {c.tag}
                   </span>
+                  {c.featured && (
+                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-gold-gradient px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#0a1124] z-10">
+                      <Sparkles className="size-3" /> Топ
+                    </span>
+                  )}
                   <span className="absolute -bottom-2 right-3 text-7xl md:text-8xl font-black text-white/5 leading-none">
                     {c.ghost}
                   </span>
                   <div className="relative text-center">
-                    <div className="text-3xl md:text-4xl font-black text-gradient-cyan">
-                      {c.conversion}
+                    <div className="text-xs text-slate-300 uppercase tracking-wider mb-1">{c.roi ?? "Результат"}</div>
+                    <div className="text-3xl md:text-4xl font-black text-gradient-gold">
+                      {c.resultRub ?? c.result}
                     </div>
-                    <div className="text-xs text-slate-300 mt-1">
-                      {c.leads}
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-xs text-cyan-200 bg-cyan-500/15 px-2 py-1 rounded-full">
+                      <BarChart3 className="size-3" />
+                      {c.conversion} конверсия
                     </div>
                   </div>
                 </div>
                 {/* Тело */}
-                <div className="p-5">
+                <div className="p-5 flex-1 flex flex-col">
                   <div className="text-xs font-bold uppercase tracking-wider text-amber-300 mb-2">
                     {c.niche}
                   </div>
                   <p className="text-sm text-slate-300 leading-relaxed mb-4">
                     {c.task}
                   </p>
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <div className="grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
                     <div>
                       <div className="text-xs text-slate-500">Звонков</div>
-                      <div className="text-sm font-bold text-white">
-                        {c.calls}
+                      <div className="text-sm font-bold text-white">{c.calls}</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500">Лиды</div>
+                      <div className="text-sm font-bold text-white">{c.leads}</div>
+                    </div>
+                  </div>
+                  {c.payback && (
+                    <div className="mt-3 flex items-center gap-2 text-xs text-cyan-300">
+                      <Clock className="size-3.5" />
+                      {c.payback}
+                    </div>
+                  )}
+                  {c.quote && (
+                    <div className="mt-4 rounded-lg bg-white/[0.03] border border-white/10 px-3 py-3">
+                      <div className="flex items-start gap-2">
+                        <Quote className="size-4 text-amber-400/60 shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-xs text-slate-300 italic leading-relaxed">
+                            {c.quote}
+                          </p>
+                          <div className="mt-2 text-xs text-cyan-300 font-semibold">
+                            — {c.quoteAuthor}, {c.quoteRole}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <Trophy className="size-5 text-amber-400" />
-                  </div>
-                  <div className="mt-3 rounded-lg bg-trust/10 border border-trust/20 px-3 py-2 text-xs text-trust font-semibold">
-                    {c.result}
-                  </div>
+                  )}
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={200}>
+          <div className="mt-10 mini-cta flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <div className="font-bold text-white text-base md:text-lg">
+                Хотите такой же результат?
+              </div>
+              <div className="text-sm text-slate-300 mt-1">
+                Обсудим ваш проект за 15 минут — рассчитаем потенциальный ROI
+              </div>
+            </div>
+            <CallButton variant="gold" size="md">
+              Обсудить проект
+            </CallButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -842,8 +996,7 @@ function Trust() {
               <span className="text-gradient-gold">все риски</span>
             </h2>
             <p className="mt-4 text-lg text-slate-300">
-              Платите за результат, контролируете каждый звонок, заменяем
-              оператора если не нравится.
+              Платите за <span className="accent-word-amber">результат</span>, контролируете каждый звонок, заменяем оператора если не нравится.
             </p>
           </div>
         </Reveal>
@@ -851,13 +1004,27 @@ function Trust() {
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {config.guarantees.map((g, i) => {
             const Icon = ICONS[g.icon] ?? ShieldCheck;
+            const isHero = i === 0;
+            const isAmber = i === 0 || i === 3;
             return (
               <Reveal key={g.title} delay={i * 80}>
-                <div className="premium-card h-full rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6">
-                  <div className="size-12 rounded-xl bg-gold-gradient/20 border border-amber-500/40 flex items-center justify-center mb-4">
-                    <Icon className="size-6 text-amber-300" />
+                <div
+                  className={`premium-card h-full rounded-2xl border p-6 ${
+                    isHero
+                      ? "sm:col-span-2 lg:col-span-1 bg-gradient-to-br from-amber-500/15 to-cyan-500/5 border-amber-400/40 shadow-lg shadow-amber-500/10"
+                      : "bg-white/5 backdrop-blur-md border-white/10"
+                  }`}
+                >
+                  <div
+                    className={`rounded-xl flex items-center justify-center mb-4 ${
+                      isHero
+                        ? "size-16 bg-gold-gradient shadow-lg shadow-amber-500/30"
+                        : "size-12 bg-amber-500/15 border border-amber-500/40"
+                    }`}
+                  >
+                    <Icon className={`size-6 ${isHero ? "text-[#0a1124]" : isAmber ? "text-amber-300" : "text-cyan-300"}`} />
                   </div>
-                  <h3 className="font-bold text-lg text-white mb-2">
+                  <h3 className={`font-bold text-white mb-2 ${isHero ? "text-xl md:text-2xl" : "text-lg"}`}>
                     {g.title}
                   </h3>
                   <p className="text-sm text-slate-300 leading-relaxed">
@@ -870,9 +1037,17 @@ function Trust() {
         </div>
 
         <Reveal delay={200}>
-          <div className="mt-12 text-center">
-            <CallButton variant="white" size="lg">
-              Получить гарантии в договоре
+          <div className="mt-10 mini-cta flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <div className="font-bold text-white text-base md:text-lg">
+                Закрепим все гарантии в договоре
+              </div>
+              <div className="text-sm text-slate-300 mt-1">
+                Подготовим договор за 1 день — без скрытых условий
+              </div>
+            </div>
+            <CallButton variant="white" size="md">
+              Получить расчёт с гарантиями →
             </CallButton>
           </div>
         </Reveal>
@@ -885,9 +1060,11 @@ function Trust() {
    9. ОТЗЫВЫ
    ============================================================ */
 function Reviews() {
+  const reviews = config.socialProof.reviews;
+
   return (
     <section className="relative py-20 md:py-28 bg-[#0a1124]">
-      <div className="absolute inset-0 dot-pattern opacity-30" />
+      <div className="absolute inset-0 dot-pattern opacity-50" />
       <div className="relative mx-auto max-w-7xl px-4 md:px-6">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
@@ -896,7 +1073,7 @@ function Reviews() {
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
               Что говорят{" "}
-              <span className="text-gradient-cyan">клиенты</span>
+              <span className="text-cyan-300">клиенты</span>
             </h2>
             <div className="mt-4 flex items-center justify-center gap-3">
               <div className="flex items-center gap-1">
@@ -917,29 +1094,68 @@ function Reviews() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {config.socialProof.reviews.map((r, i) => (
-            <Reveal key={r.name} delay={i * 100}>
-              <div className="premium-card h-full rounded-2xl bg-white/[0.03] border border-white/10 p-6 flex flex-col">
-                <Quote className="size-8 text-cyan-400/40 mb-3" />
-                <p className="text-sm text-slate-200 leading-relaxed flex-1">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {reviews.map((r, i) => (
+            <Reveal key={r.name} delay={i * 80}>
+              <div
+                className={`premium-card h-full rounded-2xl border p-6 flex flex-col ${
+                  r.featured
+                    ? "bg-gradient-to-br from-cyan-500/10 to-amber-500/5 border-cyan-400/40 shadow-lg shadow-cyan-500/10 lg:col-span-2 lg:row-span-1"
+                    : "bg-white/[0.03] border-white/10"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <Quote className={`text-cyan-400/40 ${r.featured ? "size-10" : "size-8"}`} />
+                  {r.metric && (
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-1 rounded-full border border-amber-500/20">
+                      <TrendingUp className="size-3" />
+                      {r.metric}
+                    </span>
+                  )}
+                </div>
+                <p className={`text-slate-200 leading-relaxed flex-1 ${r.featured ? "text-base md:text-lg" : "text-sm"}`}>
                   «{r.text}»
                 </p>
                 <div className="mt-5 pt-5 border-t border-white/10 flex items-center gap-3">
                   <div className="size-10 rounded-full bg-premium-gradient flex items-center justify-center text-sm font-bold text-white">
                     {r.initials}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <div className="font-semibold text-white text-sm">
                       {r.name}
                     </div>
                     <div className="text-xs text-slate-400">{r.role}</div>
                   </div>
+                  {r.sourceIcon === "yandex" && (
+                    <span className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded-full">Я.Карты · {r.date}</span>
+                  )}
+                  {r.sourceIcon === "google" && (
+                    <span className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded-full">Google · {r.date}</span>
+                  )}
+                  {r.sourceIcon === "2gis" && (
+                    <span className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded-full">2GIS · {r.date}</span>
+                  )}
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={200}>
+          <div className="mt-10 mini-cta flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <div className="font-bold text-white text-base md:text-lg">
+                Присоединиться к {config.socialProof.reviewCount} клиентам
+              </div>
+              <div className="text-sm text-slate-300 mt-1">
+                Запустим обзвон за {config.launchTime} — первые лиды на 3-й день
+              </div>
+            </div>
+            <CallButton variant="gold" size="md" pulse>
+              Запустить обзвон →
+            </CallButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -950,7 +1166,7 @@ function Reviews() {
    ============================================================ */
 function Faq() {
   return (
-    <section id="faq" className="relative py-20 md:py-28 bg-[#0d1530]">
+    <section id="faq" className="relative py-20 md:py-28 bg-gradient-to-b from-[#0d1530] to-[#0a1124]">
       <div className="mx-auto max-w-3xl px-4 md:px-6">
         <Reveal>
           <div className="text-center">
@@ -958,9 +1174,9 @@ function Faq() {
               Вопросы
             </Badge>
             <h2 className="font-black text-3xl md:text-5xl tracking-tight text-white leading-tight">
-              Коротко <span className="text-gradient-cyan">о главном</span>
+              Коротко <span className="text-cyan-300">о главном</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
+            <p className="mt-4 text-lg text-slate-300">
               Не нашли ответ? Звоните — расскажем за 2 минуты.
             </p>
           </div>
@@ -973,7 +1189,7 @@ function Faq() {
                 <AccordionItem
                   key={i}
                   value={`item-${i}`}
-                  className="rounded-xl bg-white/[0.03] border border-white/10 px-5"
+                  className="faq-item rounded-xl bg-white/[0.03] border border-white/10 px-5"
                 >
                   <AccordionTrigger className="text-left font-semibold text-white hover:text-cyan-300 hover:no-underline py-5">
                     {item.q}
@@ -988,13 +1204,16 @@ function Faq() {
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-10 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-amber-500/10 border border-cyan-500/30 p-6 md:p-8 text-center">
+          <div className="mt-10 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-amber-500/10 border-2 border-cyan-500/40 shadow-xl shadow-cyan-500/10 p-6 md:p-10 text-center">
+            <div className="inline-flex items-center justify-center size-16 rounded-2xl bg-gold-gradient mb-4 shadow-lg shadow-amber-500/30">
+              <PhoneCall className="size-8 text-[#0a1124]" />
+            </div>
             <h3 className="font-bold text-xl md:text-2xl text-white mb-2">
               Остались вопросы? Звоните!
             </h3>
             <p className="text-slate-300 mb-5">
               Ответим за 15 секунд. Если не ответим — перезвоним за{" "}
-              {config.responseTime}.
+              <span className="text-amber-300 font-semibold">{config.responseTime}</span>.
             </p>
             <CallButton variant="gold" size="lg" pulse>
               {config.phone}
@@ -1028,7 +1247,7 @@ function FinalCta() {
             <Zap className="size-3 mr-1" />
             Запуск за {config.launchTime}
           </Badge>
-          <h2 className="font-black text-3xl md:text-5xl lg:text-6xl tracking-tight text-white leading-tight">
+          <h2 className="font-black text-3xl md:text-5xl lg:text-7xl tracking-tight text-white leading-tight drop-shadow-2xl">
             Нужен обзвон <br />
             <span className="text-gradient-gold">прямо сейчас?</span>
           </h2>
@@ -1041,23 +1260,23 @@ function FinalCta() {
             <CallButton variant="gold" size="xl" pulse>
               {config.phone}
             </CallButton>
-            <div className="flex items-center gap-2 text-slate-300 text-sm">
-              <Clock className="size-4 text-amber-300" />
-              {config.workHours}
+            <div className="flex items-center gap-2 text-amber-200 text-sm font-medium">
+              <Clock className="size-4" />
+              Звоните сейчас — сегодня запустим, на 3-й день первые лиды
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-300">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="size-4 text-trust" />
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-200">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
+              <CheckCircle2 className="size-5 text-trust" />
               Без предоплаты
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="size-4 text-trust" />
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
+              <CheckCircle2 className="size-5 text-trust" />
               Договор с гарантиями
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="size-4 text-trust" />
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
+              <CheckCircle2 className="size-5 text-trust" />
               Платите за результат
             </div>
           </div>
@@ -1143,6 +1362,15 @@ function Footer() {
                   WhatsApp: {config.whatsapp}
                 </a>
               </li>
+              <li>
+                <a
+                  href={`https://t.me/${config.telegram.replace('@', '')}`}
+                  className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 transition-colors"
+                >
+                  <Send className="size-4 text-cyan-400" />
+                  Telegram: {config.telegram}
+                </a>
+              </li>
               <li className="flex items-start gap-2 text-slate-400">
                 <span className="text-cyan-400">📍</span>
                 <span>
@@ -1164,10 +1392,10 @@ function Footer() {
             © {new Date().getFullYear()} {config.company}. Все права защищены.
           </div>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-cyan-300 transition-colors">
+            <a href="/privacy" className="hover:text-cyan-300 transition-colors">
               Политика конфиденциальности
             </a>
-            <a href="#" className="hover:text-cyan-300 transition-colors">
+            <a href="/agreement" className="hover:text-cyan-300 transition-colors">
               Пользовательское соглашение
             </a>
           </div>
@@ -1188,7 +1416,7 @@ function StickyCta() {
     <div
       className={`sticky-cta ${visible ? "visible" : ""} fixed inset-x-0 bottom-0 z-50 md:hidden`}
     >
-      <div className="bg-[#0a1124]/95 backdrop-blur-md border-t border-white/10 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(0,0,0,0.4)]">
+      <div className="bg-[#0a1124]/95 backdrop-blur-md border-t border-white/10 px-3 py-2.5 safe-area-bottom shadow-[0_-8px_24px_rgba(0,0,0,0.4)]">
         <div className="flex items-center gap-2">
           <a
             href={`tel:${config.phoneRaw}`}
@@ -1198,14 +1426,109 @@ function StickyCta() {
             Позвонить
           </a>
           <a
-            href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}`}
-            className="inline-flex items-center justify-center size-12 rounded-xl bg-trust text-white shrink-0"
+            href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent('Здравствуйте! Пишу с сайта CallPro — хочу обсудить обзвон B2B')}`}
+            className="inline-flex items-center justify-center size-12 rounded-xl bg-trust/15 border border-trust/30 text-trust shrink-0"
             aria-label="WhatsApp"
           >
             <MessageCircle className="size-5" />
           </a>
+          <a
+            href={`https://t.me/${config.telegram.replace('@', '')}?start=from_site`}
+            className="inline-flex items-center justify-center size-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 shrink-0"
+            aria-label="Telegram"
+          >
+            <Send className="size-5" />
+          </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   14. COOKIE BANNER — компактный, не перекрывает CTA
+   ============================================================ */
+function CookieBanner() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    try {
+      const ok = localStorage.getItem("callpro-cookie-accepted");
+      if (!ok) {
+        // Небольшая задержка чтобы не перекрывать первый экран
+        const t = setTimeout(() => setVisible(true), 1500);
+        // Скрываем баннер при первом скролле вниз (на мобильных)
+        const onScroll = () => {
+          if (window.scrollY > 600) {
+            setVisible(false);
+          } else if (window.scrollY < 200) {
+            setVisible(true);
+          }
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => {
+          clearTimeout(t);
+          window.removeEventListener("scroll", onScroll);
+        };
+      }
+    } catch {}
+  }, []);
+
+  const accept = () => {
+    try {
+      localStorage.setItem("callpro-cookie-accepted", "1");
+    } catch {}
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div className="cookie-banner">
+      <div className="flex items-start gap-3">
+        <div className="text-2xl shrink-0">🍪</div>
+        <div className="flex-1">
+          <div className="text-sm text-slate-200 leading-relaxed">
+            Мы используем cookies для улучшения сайта и аналитики. Продолжая, вы соглашаетесь с{" "}
+            <a href="/privacy" className="text-cyan-300 underline hover:text-cyan-200">политикой обработки ПДн</a>.
+          </div>
+          <button
+            onClick={accept}
+            className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/40 px-3 py-1.5 text-xs font-semibold text-cyan-200 hover:bg-cyan-500/30 transition-colors"
+          >
+            <CheckCircle2 className="size-3.5" />
+            Принять
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   15. ПРОГРЕСС-БАР СКРОЛЛА — desktop only
+   ============================================================ */
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      setProgress(height > 0 ? scrollTop / height : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div className="scroll-progress hidden lg:block" aria-hidden>
+      <div
+        className="scroll-progress__fill"
+        style={{ transform: `scaleY(${progress})` }}
+      />
     </div>
   );
 }
@@ -1217,6 +1540,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#0a1124] text-white overflow-x-hidden">
       <Navigation />
+      <ScrollProgress />
       <Hero />
       <Pains />
       <Services />
@@ -1229,6 +1553,7 @@ export default function Home() {
       <FinalCta />
       <Footer />
       <StickyCta />
+      <CookieBanner />
     </main>
   );
 }

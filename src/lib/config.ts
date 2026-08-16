@@ -53,8 +53,15 @@ export interface CaseItem {
   leads: string;
   conversion: string;
   result: string;
+  resultRub?: string;
+  roi?: string;
+  payback?: string;
+  quote?: string;
+  quoteAuthor?: string;
+  quoteRole?: string;
   tag: string;
   ghost: string;
+  featured?: boolean;
 }
 
 export interface ReviewItem {
@@ -62,6 +69,11 @@ export interface ReviewItem {
   name: string;
   initials: string;
   role: string;
+  source?: string;
+  sourceIcon?: "yandex" | "google" | "2gis";
+  date?: string;
+  featured?: boolean;
+  metric?: string;
 }
 
 export interface StatItem {
@@ -122,6 +134,11 @@ export const config = {
         name: "Александр К.",
         initials: "АК",
         role: "Директор, B2B-сервис",
+        source: "Яндекс.Карты",
+        sourceIcon: "yandex",
+        date: "2 недели назад",
+        featured: true,
+        metric: "50 лидов за 5 дней",
       },
       {
         text:
@@ -129,6 +146,10 @@ export const config = {
         name: "Мария С.",
         initials: "МС",
         role: "Коммерческий директор, ритейл",
+        source: "Google",
+        sourceIcon: "google",
+        date: "месяц назад",
+        metric: "2 менеджера освобождены",
       },
       {
         text:
@@ -136,6 +157,43 @@ export const config = {
         name: "Дмитрий В.",
         initials: "ДВ",
         role: "CEO, доставка",
+        source: "2GIS",
+        sourceIcon: "2gis",
+        date: "3 недели назад",
+        metric: "99% SLA",
+      },
+      {
+        text:
+          "Закрыли квартальный план продаж за 6 недель благодаря обзвону базы. ROI 320% — окупилось в первый месяц.",
+        name: "Игорь Л.",
+        initials: "ИЛ",
+        role: "Коммерческий директор, IT-интегратор",
+        source: "Яндекс.Карты",
+        sourceIcon: "yandex",
+        date: "5 дней назад",
+        metric: "ROI 320%",
+      },
+      {
+        text:
+          "Актуализировали базу из 12 000 контактов за неделю. После этого/email-рассылка стала приносить в 4 раза больше лидов.",
+        name: "Екатерина П.",
+        initials: "ЕП",
+        role: "Маркетинг-директор, промышленность",
+        source: "Google",
+        sourceIcon: "google",
+        date: "2 месяца назад",
+        metric: "x4 к лидам",
+      },
+      {
+        text:
+          "Боялись отдавать на аутсорс — теперь жалеем, что не начали раньше. Первые сделки закрыли на 8-й день работы.",
+        name: "Сергей М.",
+        initials: "СМ",
+        role: "Founder, логистика",
+        source: "Яндекс.Карты",
+        sourceIcon: "yandex",
+        date: "1 неделю назад",
+        metric: "первая сделка на 8-й день",
       },
     ] as ReviewItem[],
   },
@@ -289,7 +347,6 @@ export const config = {
         "CRM-интеграция",
         "Личный менеджер проекта",
       ],
-      popular: true,
     },
     {
       type: "Актуализация БД",
@@ -349,8 +406,15 @@ export const config = {
       leads: "870 лидов",
       conversion: "27%",
       result: "+1,4 млн ₽ выручки за квартал",
+      resultRub: "+1,4 млн ₽",
+      roi: "ROI 280%",
+      payback: "Окупился за 21 день",
+      quote: "Закрыли квартальный план за 6 недель. Обзвон окупился в первый же месяц.",
+      quoteAuthor: "Александр К.",
+      quoteRole: "Директор, B2B-сервис",
       tag: "Холодные звонки",
       ghost: "B2B",
+      featured: true,
     },
     {
       niche: "E-commerce",
@@ -359,6 +423,12 @@ export const config = {
       leads: "2 000 клиентов",
       conversion: "40%",
       result: "+850 тыс. ₽ за 30 дней",
+      resultRub: "+850 тыс. ₽",
+      roi: "ROI 340%",
+      payback: "Окупился за 14 дней",
+      quote: "Вернули 40% ушедших клиентов. Дешевле, чем привлекать новых.",
+      quoteAuthor: "Мария С.",
+      quoteRole: "Коммерческий директор, ритейл",
       tag: "Реактивация",
       ghost: "E-com",
     },
@@ -369,8 +439,62 @@ export const config = {
       leads: "99% SLA",
       conversion: "99%",
       result: "Снижение оттока на 23%",
+      resultRub: "−23% отток",
+      roi: "ROI 410%",
+      payback: "Окупился за 30 дней",
+      quote: "Ни одного пропущенного звонка за 4 месяца. Отток клиентов упал.",
+      quoteAuthor: "Дмитрий В.",
+      quoteRole: "CEO, доставка",
       tag: "Горячая линия",
       ghost: "24/7",
+    },
+    {
+      niche: "IT-интегратор",
+      task: "Обзвон баз по tender-площадкам, назначение встреч с ЛПР",
+      calls: "1 800 звонков",
+      leads: "140 встреч",
+      conversion: "7,8%",
+      result: "+2,3 млн ₽ за 2 месяца",
+      resultRub: "+2,3 млн ₽",
+      roi: "ROI 320%",
+      payback: "Окупился за 18 дней",
+      quote: "Назначили 140 встреч с ЛПР за 2 месяца. Закрыли 3 крупных контракта.",
+      quoteAuthor: "Игорь Л.",
+      quoteRole: "Коммерческий директор, IT",
+      tag: "Телемаркетинг",
+      ghost: "IT",
+    },
+    {
+      niche: "Промышленность",
+      task: "Актуализация базы 12 000 контактов, обогащение данными",
+      calls: "12 000 контактов",
+      leads: "9 200 валидных",
+      conversion: "77%",
+      result: "×4 к эффективности email-рассылок",
+      resultRub: "×4 к лидам",
+      roi: "ROI 190%",
+      payback: "Окупился за 45 дней",
+      quote: "После актуализации email-рассылка стала приносить в 4 раза больше лидов.",
+      quoteAuthor: "Екатерина П.",
+      quoteRole: "Маркетинг-директор",
+      tag: "Актуализация БД",
+      ghost: "B2B",
+    },
+    {
+      niche: "Логистика",
+      task: "Холодный обзвон по базам грузоотправителей, продажа перевозок",
+      calls: "2 400 звонков",
+      leads: "190 сделок",
+      conversion: "8%",
+      result: "+1,7 млн ₽ за квартал",
+      resultRub: "+1,7 млн ₽",
+      roi: "ROI 250%",
+      payback: "Окупился за 12 дней",
+      quote: "Первые сделки закрыли на 8-й день. Жалеем, что не начали раньше.",
+      quoteAuthor: "Сергей М.",
+      quoteRole: "Founder, логистика",
+      tag: "Холодные звонки",
+      ghost: "B2B",
     },
   ] as CaseItem[],
 
