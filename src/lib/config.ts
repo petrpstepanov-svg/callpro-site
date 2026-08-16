@@ -5,7 +5,7 @@
  */
 
 export interface ServiceItem {
-  icon: string;
+  image: string;
   title: string;
   desc: string;
   price: string;
@@ -49,6 +49,7 @@ export interface FaqItem {
 export interface CaseItem {
   niche: string;
   task: string;
+  image: string;
   calls: string;
   leads: string;
   conversion: string;
@@ -235,39 +236,39 @@ export const config = {
   // Услуги
   services: [
     {
-      icon: "PhoneCall",
+      image: "/images/services/01-cold-calls.png",
       title: "Холодные звонки B2B",
       desc: "Обзвон по вашей базе или нашей → квалифицированные лиды и встречи с ЛПР",
       price: "от 80 ₽ / лид",
       featured: true,
     },
     {
-      icon: "Presentation",
+      image: "/images/services/02-telemarketing.png",
       title: "Телемаркетинг",
       desc: "Презентация продукта, назначение встреч с ЛПР, квалификация потребности",
       price: "от 40 ₽ / мин",
       featured: true,
     },
     {
-      icon: "Database",
+      image: "/images/services/03-database.png",
       title: "Актуализация баз данных",
       desc: "Очистка и обогащение CRM: проверка контактов, должностей, доп. данных",
       price: "от 110 000 ₽",
     },
     {
-      icon: "Megaphone",
+      image: "/images/services/04-mass-calls.png",
       title: "Нагрузочный обзвон",
       desc: "Массовый обзвон: информирование, приглашения, напоминания о событиях",
       price: "от 25 ₽ / звонок",
     },
     {
-      icon: "ClipboardList",
+      image: "/images/services/05-surveys.png",
       title: "Опросы и анкетирование",
       desc: "Сбор обратной связи, NPS, исследования рынка и удовлетворённости клиентов",
       price: "от 120 ₽ / анкета",
     },
     {
-      icon: "Headset",
+      image: "/images/services/06-hotline.png",
       title: "Приём входящих (горячая линия)",
       desc: "Обработка входящих звонков, переадресация, запись разговоров 24/7",
       price: "от 14 ₽ / мин",
@@ -402,6 +403,7 @@ export const config = {
     {
       niche: "B2B-сантехника",
       task: "Прозвон базы строительных компаний, продажа инженерной сантехники",
+      image: "/images/cases/01-plumbing.png",
       calls: "3 200 звонков",
       leads: "870 лидов",
       conversion: "27%",
@@ -419,6 +421,7 @@ export const config = {
     {
       niche: "E-commerce",
       task: "Обзвон спящей базы интернет-магазина, возврат ушедших клиентов",
+      image: "/images/cases/02-ecommerce.png",
       calls: "5 000 звонков",
       leads: "2 000 клиентов",
       conversion: "40%",
@@ -435,6 +438,7 @@ export const config = {
     {
       niche: "Доставка",
       task: "Круглосуточная поддержка клиентов сервиса доставки",
+      image: "/images/cases/03-delivery.png",
       calls: "800+ звонков/день",
       leads: "99% SLA",
       conversion: "99%",
@@ -451,6 +455,7 @@ export const config = {
     {
       niche: "IT-интегратор",
       task: "Обзвон баз по tender-площадкам, назначение встреч с ЛПР",
+      image: "/images/cases/04-it.png",
       calls: "1 800 звонков",
       leads: "140 встреч",
       conversion: "7,8%",
@@ -467,6 +472,7 @@ export const config = {
     {
       niche: "Промышленность",
       task: "Актуализация базы 12 000 контактов, обогащение данными",
+      image: "/images/cases/05-industry.png",
       calls: "12 000 контактов",
       leads: "9 200 валидных",
       conversion: "77%",
@@ -483,6 +489,7 @@ export const config = {
     {
       niche: "Логистика",
       task: "Холодный обзвон по базам грузоотправителей, продажа перевозок",
+      image: "/images/cases/06-logistics.png",
       calls: "2 400 звонков",
       leads: "190 сделок",
       conversion: "8%",

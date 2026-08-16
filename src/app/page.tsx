@@ -606,7 +606,6 @@ function Services() {
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {config.services.map((s, i) => {
-            const Icon = ICONS[s.icon] ?? PhoneCall;
             return (
               <Reveal key={s.title} delay={i * 80}>
                 <div
@@ -622,13 +621,20 @@ function Services() {
                     </span>
                   )}
                   <div
-                    className={`size-14 rounded-xl flex items-center justify-center mb-4 ${
+                    className={`size-16 md:size-20 rounded-xl flex items-center justify-center mb-4 overflow-hidden ${
                       s.featured
                         ? "bg-cyan-500/25 border border-cyan-400/50"
                         : "bg-cyan-500/15 border border-cyan-500/30"
                     }`}
                   >
-                    <Icon className="size-6 text-cyan-300" />
+                    <Image
+                      src={s.image}
+                      alt=""
+                      width={80}
+                      height={80}
+                      className="size-16 md:size-20 object-cover"
+                      unoptimized
+                    />
                   </div>
                   <h3 className="font-bold text-lg text-white mb-2">
                     {s.title}
@@ -893,10 +899,19 @@ function Cases() {
                     : "bg-white/[0.03] border-white/10"
                 }`}
               >
-                {/* Header — деньги крупно, процент мелко */}
-                <div className="relative h-44 bg-gradient-to-br from-cyan-500/15 via-[#131c3d] to-amber-500/10 flex flex-col items-center justify-center overflow-hidden p-4">
-                  <div className="absolute inset-0 dot-pattern opacity-40" />
-                  <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/15 px-2.5 py-1 rounded-full border border-cyan-500/30 z-10">
+                {/* Header — фото-фон с тёмным overlay, деньги крупно */}
+                <div className="relative h-44 flex flex-col items-center justify-center overflow-hidden p-4">
+                  <Image
+                    src={c.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                  {/* Тёмный градиентный overlay для читабельности */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0f1838]/95 via-[#0f1838]/85 to-[#0a1124]/95" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1124] via-transparent to-[#0a1124]/60" />
+                  <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/15 px-2.5 py-1 rounded-full border border-cyan-500/30 z-10 backdrop-blur-sm">
                     {c.tag}
                   </span>
                   {c.featured && (
@@ -904,15 +919,15 @@ function Cases() {
                       <Sparkles className="size-3" /> Топ
                     </span>
                   )}
-                  <span className="absolute -bottom-2 right-3 text-7xl md:text-8xl font-black text-white/5 leading-none">
+                  <span className="absolute -bottom-2 right-3 text-7xl md:text-8xl font-black text-white/5 leading-none z-10">
                     {c.ghost}
                   </span>
-                  <div className="relative text-center">
+                  <div className="relative text-center z-10">
                     <div className="text-xs text-slate-300 uppercase tracking-wider mb-1">{c.roi ?? "Результат"}</div>
-                    <div className="text-3xl md:text-4xl font-black text-gradient-gold">
+                    <div className="text-3xl md:text-4xl font-black text-gradient-gold drop-shadow-lg">
                       {c.resultRub ?? c.result}
                     </div>
-                    <div className="mt-2 inline-flex items-center gap-1.5 text-xs text-cyan-200 bg-cyan-500/15 px-2 py-1 rounded-full">
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-xs text-cyan-200 bg-cyan-500/25 px-2 py-1 rounded-full backdrop-blur-sm border border-cyan-400/30">
                       <BarChart3 className="size-3" />
                       {c.conversion} конверсия
                     </div>
