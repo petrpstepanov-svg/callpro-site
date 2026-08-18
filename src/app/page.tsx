@@ -639,7 +639,7 @@ function Pains() {
               Закрыть эти 6 болей за {config.launchTime} →
             </CtaAnchor>
             <div className="mt-3 text-xs text-slate-400">
-              Без предоплаты · Перезвоним за 15 минут · Договор с гарантиями
+              Перезвоним за 15 минут · Договор с гарантиями · Оплата за звонки
             </div>
           </div>
         </Reveal>
@@ -666,7 +666,7 @@ function Services() {
               <span className="text-cyan-300">коммуникаций B2B</span>
             </h2>
             <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
-              От холодных звонков до горячей линии — всё в одних руках. Оплата за <span className="accent-word">результат</span> или по минутам.
+              От холодных звонков до актуализации баз — всё в одних руках. Оплата за <span className="accent-word">звонки</span>, прозрачно и без скрытых платежей.
             </p>
           </div>
         </Reveal>
@@ -1086,7 +1086,7 @@ function Trust() {
               <span className="text-gradient-gold">все риски</span>
             </h2>
             <p className="mt-4 text-lg text-slate-300 section-subtitle-shadow">
-              Платите за <span className="accent-word-amber">результат</span>, контролируете каждый звонок, заменяем оператора если не нравится.
+              Платите за <span className="accent-word-amber">звонки</span>, контролируете каждый звонок, живые операторы с опытом 10+ лет.
             </p>
           </div>
         </Reveal>
@@ -1348,7 +1348,7 @@ function FinalCta() {
           </h2>
           <p className="mt-6 text-lg md:text-xl text-slate-200 max-w-2xl mx-auto section-subtitle-shadow">
             Позвоните — рассчитаем стоимость за 15 минут, запустим обзвон за{" "}
-            {config.launchTime}. Первые лиды — на третий день.
+            {config.launchTime}. Первые лиды — уже завтра.
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4">
@@ -1357,14 +1357,14 @@ function FinalCta() {
             </CtaAnchor>
             <div className="flex items-center gap-2 text-amber-200 text-sm font-medium">
               <Clock className="size-4" />
-              Звоните сейчас — сегодня запустим, на 3-й день первые лиды
+              Звоните сейчас — запустим за 1 день, первые лиды уже завтра
             </div>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-200">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
               <CheckCircle2 className="size-5 text-trust" />
-              Без предоплаты
+              Запуск от 1 дня
             </div>
             <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
               <CheckCircle2 className="size-5 text-trust" />
@@ -1372,7 +1372,7 @@ function FinalCta() {
             </div>
             <div className="inline-flex items-center gap-2 bg-white/10 border border-trust/30 px-4 py-2 rounded-full">
               <CheckCircle2 className="size-5 text-trust" />
-              Платите за результат
+              Оплата за звонки
             </div>
           </div>
         </Reveal>
@@ -1410,8 +1410,8 @@ function Footer() {
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-              {config.companyFull}. Холодные звонки, телемаркетинг, обзвон базы,
-              горячая линия. Оплата за результат.
+              {config.companyFull}. Холодные звонки, телемаркетинг, актуализация баз,
+              продажи под ключ. Оплата за звонки.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
               <BadgeCheck className="size-4 text-cyan-400" />
